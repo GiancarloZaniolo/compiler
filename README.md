@@ -16,23 +16,25 @@
 In order to build the compiler, you must first install the correct versions of all of the necessary dependancies. 
 All dependancies can be found in the cmu411/autograder-ocaml docker image.
 
-To create an instance of the docker container, download docker, and run:
-`docker pull cmu411/autograder-ocaml:latest`
-`docker run --name 411 -td cmu411/autograder-ocaml:latest`
-`docker exec -it 411 bash`
+To create an instance of the docker container, download docker, and run:\
+`docker pull cmu411/autograder-ocaml:latest`\
+`docker run --name 411 -td cmu411/autograder-ocaml:latest`\
+`docker exec -it 411 bash`\
 Next, clone this repository in the docker container, and type `make` while in the main directory to build it.
 
 The compiler executable will is located at `./bin/c0c`
 
-Importantly, the compiler supports compilation to different target architectures including abs (abstract three-address assembly), x86-64, arm64, and llvm (LLVM IR). It also supports optimizations `-O0` through `-O3`, though `-O2` and `-O3` are only available for x86-64  and arm64 targets, as they involve leveraging llvm.
+Importantly, the compiler supports compilation to different target architectures including abs (abstract three-address assembly), x86-64, arm64, and llvm (LLVM IR). It also supports optimizations `-O0` through `-O3`, though `-O2` and `-O3` are only available for x86-64  and arm64 targets, as they involve leveraging llvm.\
 If you wish to link external functions to enable functionality not available in the l4 language (a subset of c0), such as printing, or floating-point arithmetic, you can attach a header file with function prototypes using `-l example_proto.h`
 
 Information on the available compiler flags can be found by running `./bin/c0c --help`
 
-Additionally, a few example files are available in `./examples` for you to try out.
+Additionally, a few example files are available in `./examples` for you to try out.\
 On an x86-64 machine, you would run `./bin/c0c -e x86-64 ./examples/FILE` to generate the object file, and then link it to a bench that will run it using `gcc`. A simple bench is provided at `./examples/bench.c`.
 
 The rest of this document contains design decisions taken during the creation of the compiler, and at the very bottom, an explanation of what each file does.
+
+---
 
 ## Lab 6 Project
 For Lab 6, we added LLVM backend support. As an extension, we used the ability of the compiler to target the LLVM IR to implement an ARM64 backend as well as two new optimization levels.
