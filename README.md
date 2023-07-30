@@ -187,19 +187,6 @@ Register coalescing also made register allocation slightly slower because of the
 ### x86_64 generation:
 The x86 tree datatype was created with the intention of reflecting the final asembly as closely and as simply as possible. Registers and stack positions are now explicitly sized, and instructions use size information from their operands to determine what size they should be (add q vs l to end) in the outputted assembly, they are never explicitly sized. Additionally, instead of always jumping to a spot at the end of the program to return, returns were done by copy pasting the assembly which restores callee-saved registers wherever a return was called, but this will likely change in the future. Also, three-addr temps were never assigned to registers R14 and R15, since they are reserved to be used as an extra temp for x86 commands, or as a place to store a memory address to be dereferenced. The overall translation was done by iterating through the quad instructions and casing on the operands to ensure correct end behavior. 
 
-## Test Scripts
-### run_tests.py and print_results.py
-The `run_tests.py` script is used to test different combinations and orderings of compiler optimizations. It loops through a list of jobs that each have different flags to pass to `c0c` and runs the `timecompiler` script for each of them. `print_results.py` prints the multipliers from each of the generated results files.
-
-### code_eval.py
-The `code_eval.py` script was used to test the correctness of generated ARM64 assembly, as it would be prohibitively difficult to try to modify `gradecompiler` to fulfill that purpose. It takes in the directory with all of the files you want to test as an argument.
-This script assumes that all typechecking steps are done correctly (which is safe to assume if it passes gradecompiler, as the behavior of the compiler should not depend on the architecture it is run on), and otherwise prints an error message if the output does not match what the message at the top of the test file states. Additionally, running this script will cause any arithmetic error to be printed in the terminal. In order to only get the error messages that signify a compiler failure, it is recommended that you write 2> /dev/null after the command used to run this script. Lastly, it is important to note that this tester will only work on a computer with an ARM64 processor.
-
-### code_size_gcc.py, code_size.py, and code_time_tester.py
-These scripts were used to generate the data for some of the graphs seen in the report. 
-`code_size_gcc.py` compiles all `.c` files in a folder, links them with run411.c, uses bash `wc` to count the size of the executable, and places the data for all files and all optimization levels in a csv file called gcc_sizes.txt
-`code_size.py` does the same thing as `code_size_gcc.py` except with our own compiler. Additionally, it has the capability to dest all combinations of optimizations on our level vs. `llc` and print them to a file. Lastly, has the capability to test for both -x86-64 and ARM64 depending on the flags you pass into functions.
-Lastly `code_time_tester` is used to time how long the traces took to run at different optimization levels. It also takes a directory as an argument.
 ---
 
 ## Source Files
