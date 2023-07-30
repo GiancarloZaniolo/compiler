@@ -1,4 +1,4 @@
-(* L1 Compiler
+(* L4 Compiler
  * TypeChecker
  * Author: Alex Vaynberg <alv@andrew.cmu.edu>
  * Modified: Frank Pfenning <fp@cs.cmu.edu>
@@ -14,4 +14,23 @@
  *)
 
 (* prints error message and raises ErrorMsg.error if error found *)
-val typecheck : Ast.program -> unit
+
+(* module A = Ast *)
+open Core
+module SHT : Hashtbl.S with type key = Symbol.t
+
+
+type init_status =
+| Decl
+| Init
+
+type fdecl_status = 
+{ fdecl : Ast.fdecl
+; init_status : init_status
+; used : bool }
+
+type gdecl_ctxts = 
+  { fdecl_ctxt : fdecl_status SHT.t
+  ; typedef_ctxt : Ast.type_ SHT.t }
+
+val typecheck : Ast.program -> (Ast.program * gdecl_ctxts)

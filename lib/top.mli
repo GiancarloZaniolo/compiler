@@ -1,4 +1,4 @@
-(* L1 Compiler
+(* L4 Compiler
  * Top Level Environment
  * Author: Kaustuv Chaudhuri <kaustuv+@cs.cmu.edu>
  * Modified: Alex Vaynberg <alv@andrew.cmu.edu>

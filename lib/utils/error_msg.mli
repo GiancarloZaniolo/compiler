@@ -1,4 +1,4 @@
-(* L1 Compiler
+(* L4 Compiler
  * Mutable data structure for recording errors.
  *
  * Author: Kaustuv Chaudhuri <kaustuv+@cs.cmu.edu>

@@ -35,3 +35,4 @@ let symbol (name : string) : t =
 let name : t -> string = fun x -> x.name
 
 include Comparable.Make (T)
+include Hashable.Make (T)

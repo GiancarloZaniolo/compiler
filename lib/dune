@@ -1,9 +1,9 @@
 (library
  (name compiler)
- (libraries core cmdliner yojson)
+ (libraries core cmdliner yojson str)
  (inline_tests)
  (preprocess
-  (pps ppx_jane ppx_expect)))
+  (pps ppx_jane ppx_expect ppx_deriving.show)))
 
 ; makes subdirs not be their own module/library
 (include_subdirs unqualified)
