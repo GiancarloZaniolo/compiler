@@ -1,2 +1,7 @@
 _build
 .merlin
+*.out
+*.s
+*.abs
+*.ll
+bin/c0c

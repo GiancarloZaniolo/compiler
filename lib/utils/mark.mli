@@ -1,4 +1,4 @@
-(* L1 Compiler
+(* L4 Compiler
  *
  * Library for associating asts with positions in the source file.
  * This is not necessary for a working compiler, but can lead to
